@@ -1,0 +1,18 @@
+---
+language: node_js
+node_js:
+  - stable
+  - "5.0"
+  - "4.0"
+
+sudo: false
+
+before_install:
+  - npm config set spin false
+  - npm install -g npm@^2
+
+install:
+  - npm install
+
+script:
+  - npm test
