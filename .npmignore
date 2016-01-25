@@ -1,0 +1,5 @@
+# files
+.babelrc
+.editorconfig
+.eslintrc.*
+.travis.yml
