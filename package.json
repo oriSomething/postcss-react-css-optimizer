@@ -1,6 +1,6 @@
 {
   "name": "postcss-react-css-optimizer",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Optimization of CSS by React components",
   "main": "dist/index.js",
   "scripts": {
