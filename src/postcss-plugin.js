@@ -4,6 +4,8 @@ const selectorParser = require("postcss-selector-parser");
 const _ = require("lodash");
 const getFilesListByPatterns = require("./utilities/get-files-list-by-patterns");
 const ReactCSSAnalyzer = require("./react-css-analyzer");
+const SU = require("./selectors-utilities");
+
 
 /**
  * @typedef {Object} Options
@@ -22,12 +24,8 @@ function createTransform(whiteListClasses, rule) {
     const selectorsLength = selectors.length;
 
     selectors.each(selector => {
-      if (selector.length === 1) {
-        if (selector.first.type === "class") {
-          if (!_.includes(whiteListClasses, selector.first.value)) {
-            return selector.parent.remove(selector);
-          }
-        }
+      if (SU.isSupported(selector) && SU.canOmit(selector, whiteListClasses)) {
+        selector.removeSelf();
       }
 
       // Do nothing with unsupported rules

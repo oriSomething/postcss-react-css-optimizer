@@ -30,44 +30,6 @@ describe("PostCSSPlugin", function() {
     assert.equal(css, ".x{}");
   });
 
-  it("shouldn't remove nested selectors: .x.x", async function() {
-    const result = await postcss([reactCSSOptimizer])
-      .process(".x.y {}", {})
-      .then();
-    const css = result.css.replace(/\s/g, "");
-
-    assert.equal(css, ".x.y{}");
-  });
-
-  describe("parent child relation", function() {
-    it("shouldn't remove: .x > .x", async function() {
-      const result = await postcss([reactCSSOptimizer])
-        .process(".x > .y {}", {})
-        .then();
-      const css = result.css.trim();
-
-      assert.equal(css, ".x > .y {}");
-    });
-
-    it("shouldn't remove: .x > .x > .x", async function() {
-      const result = await postcss([reactCSSOptimizer])
-        .process(".x > .y > .z {}", {})
-        .then();
-      const css = result.css.trim();
-
-      assert.equal(css, ".x > .y > .z {}");
-    });
-
-    it("shouldn't remove: .x .x", async function() {
-      const result = await postcss([reactCSSOptimizer])
-      .process(".x .y {}", {})
-      .then();
-      const css = result.css.trim();
-
-      assert.equal(css, ".x .y {}");
-    });
-  });
-
   describe("or rules (.x, .y)", function() {
     it("should remove all", async function() {
       const result = await postcss([reactCSSOptimizer])
